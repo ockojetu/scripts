@@ -1,0 +1,913 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "🍷 Impossible Squid Game! Glass Bridge 2 🍷",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "MaxikTheBest Hub",
+   LoadingSubtitle = "by MaxikTheBest",
+   Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Big Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "🔐 Key 🔐",
+      Subtitle = "🎂 Key system 🎂",
+      Note = "Correct key is: MaxikTheBestOnTop69", -- Use this to tell the user how to get a key
+      FileName = "MaxikTheBestHubkeyScript", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"https://pastebin.com/raw/RdnnNFet"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("🎶 Game Info 🎶", nil) -- Title, Image
+local MainSection = MainTab:CreateSection("♥ Game: ♥ ")
+
+Rayfield:Notify({
+   Title = "✅ Success! ✅",
+   Content = "⚒ Script is working! ⚒",
+   Duration = 3.5,
+   Image = nil,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "🎉 Get game info 🎉",
+   Callback = function()
+   -- Roblox LocalScript
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "SquidGameGUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- Create main frame
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 400, 0, 250)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BackgroundTransparency = 1
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = gui
+
+-- Smooth fade in
+TweenService:Create(mainFrame, TweenInfo.new(0.6, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    BackgroundTransparency = 0.05
+}):Play()
+
+-- UICorner for round edges
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 16)
+corner.Parent = mainFrame
+
+-- UI stroke for subtle border
+local stroke = Instance.new("UIStroke")
+stroke.Thickness = 1
+stroke.Color = Color3.fromRGB(60, 60, 60)
+stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+stroke.Parent = mainFrame
+
+-- Game Title
+local title = Instance.new("TextLabel")
+title.Text = "Some sort of squid game"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 28
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundTransparency = 1
+title.Size = UDim2.new(1, 0, 0, 60)
+title.Position = UDim2.new(0, 0, 0, 10)
+title.Parent = mainFrame
+
+-- Game Info
+local info = Instance.new("TextLabel")
+info.Text = "Game ID: 16993432698\nSecurity: BAD"
+info.Font = Enum.Font.Gotham
+info.TextSize = 18
+info.TextColor3 = Color3.fromRGB(200, 200, 200)
+info.BackgroundTransparency = 1
+info.Size = UDim2.new(1, -40, 0, 80)
+info.Position = UDim2.new(0, 20, 0, 70)
+info.TextWrapped = true
+info.TextXAlignment = Enum.TextXAlignment.Left
+info.TextYAlignment = Enum.TextYAlignment.Top
+info.Parent = mainFrame
+
+-- Close button
+local closeBtn = Instance.new("TextButton")
+closeBtn.Text = "🌂"
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 20
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 5)
+closeBtn.AnchorPoint = Vector2.new(0.5, 0)
+closeBtn.BackgroundTransparency = 0.1
+closeBtn.AutoButtonColor = false
+closeBtn.Parent = mainFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(1, 0)
+closeCorner.Parent = closeBtn
+
+local function smoothFadeOut()
+    TweenService:Create(mainFrame, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
+        BackgroundTransparency = 1
+    }):Play()
+    wait(0.4)
+    gui:Destroy()
+end
+
+-- Hover effect
+closeBtn.MouseEnter:Connect(function()
+    TweenService:Create(closeBtn, TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+    }):Play()
+end)
+
+closeBtn.MouseLeave:Connect(function()
+    TweenService:Create(closeBtn, TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    }):Play()
+end)
+
+closeBtn.MouseButton1Click:Connect(smoothFadeOut)
+
+   end,
+})
+local Label = MainTab:CreateLabel("This script is made for Impossible Squid Game as a fun exploit script to break this low secure game. Hope you enjoy!", nil, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+local FreeTab = Window:CreateTab("🥶 Free stuff 🥶", nil) -- Title, Image
+local Section = FreeTab:CreateSection("Free win (only use every 12s⌚)")
+local Button = FreeTab:CreateButton({
+   Name = "🏆 Get Free Win 🏆",
+   Callback = function()
+   game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClaimReward"):FireServer()
+   end,
+})
+
+local Section = FreeTab:CreateSection("🤑💸 Free Robux Crate 🤑💸")
+local Button = FreeTab:CreateButton({
+   Name = "🤑 Get Free Crate 🤑",
+   Callback = function()
+   -- Wait for the RemoteEvent
+local crateRemote = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("crateRemote")
+
+-- First: processCrate
+local args1 = {
+    "processCrate",
+    3
+}
+crateRemote:FireServer(unpack(args1))
+print("🟢 Fired: processCrate with ID 3")
+
+-- Small delay (optional, can be instant if server accepts it)
+wait(0.2)
+
+-- Then: processReward
+local args2 = {
+    "processReward",
+    3
+}
+crateRemote:FireServer(unpack(args2))
+print("🟢 Fired: processReward with ID 3")
+
+   end,
+})
+
+local Section = FreeTab:CreateSection("🍀 Free Lucky Box 🍀 (⌚ need to wait the first time! ⌚) ")
+local Button = FreeTab:CreateButton({
+   Name = "🎁 Get free lucky blox 🎁",
+   Callback = function()
+   local args = {
+	"processClaim"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("blockRemote"):FireServer(unpack(args))
+   end,
+})
+
+local Section = FreeTab:CreateSection("🐥 Free Vip 🐥")
+local Button = FreeTab:CreateButton({
+   Name = "🔥 Get Free Vip 🔥",
+   Callback = function()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Wait for character to load
+local function teleport()
+	local character = player.Character or player.CharacterAdded:Wait()
+	local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+	-- Teleport position
+	humanoidRootPart.CFrame = CFrame.new(-734, -3, 816)
+end
+
+-- Call teleport
+teleport()
+
+   end,
+})
+
+local Section = FreeTab:CreateSection("😬 Free Purple guy 😬")
+local Button = FreeTab:CreateButton({
+   Name = "💜 Get Grimace shake 💜",
+   Callback = function()
+local args = {
+	workspace:WaitForChild("Lobby"):WaitForChild("Morphs"):WaitForChild("grimace"),
+	"Equip"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("morphRemote"):FireServer(unpack(args))
+   end,
+})
+
+local TeleportTab = Window:CreateTab("📞 Teleports 📞", nil) -- Title, Image
+local Section = TeleportTab:CreateSection("🏓 Game Teleports 🏓")
+local Button = TeleportTab:CreateButton({
+   Name = "🥇 Teleport near end 🥇",
+   Callback = function()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Wait for character to load
+local function teleport()
+	local character = player.Character or player.CharacterAdded:Wait()
+	local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+	-- Teleport position
+	humanoidRootPart.CFrame = CFrame.new(-746, -2, -522)
+end
+
+-- Call teleport
+teleport()
+
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "🦺 Teleport to spawn 🦺",
+   Callback = function()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Wait for the character to load
+local function teleport()
+	local character = player.Character or player.CharacterAdded:Wait()
+	local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+	-- Teleport to new position
+	humanoidRootPart.CFrame = CFrame.new(-746, -3, 744)
+end
+
+-- Call the teleport function
+teleport()
+   end,
+})
+
+local Button = TeleportTab:CreateButton({
+   Name = "😡 Complete Hard Parkour 😡",
+   Callback = function()
+    local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Wait for the character to load
+local function teleport()
+	local character = player.Character or player.CharacterAdded:Wait()
+	local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+	-- Teleport to new position
+	humanoidRootPart.CFrame = CFrame.new(-674.34, -3.40, 1359.5)
+end
+
+-- Call the teleport function
+teleport()        
+   end,
+})
+
+local AutoTab = Window:CreateTab("📀 Auto Farm 📀", nil) -- Title, Image
+local Section = AutoTab:CreateSection("🏆 Auto Win 🏆")
+local Toggle = AutoTab:CreateToggle({
+   Name = "🔥 Toggle Auto Farm 🔥",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   while true do
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClaimReward"):FireServer()
+    wait(12.5) -- adjust as needed
+end
+   end,
+})
+
+local Section = AutoTab:CreateSection("💲 Auto Robux Create 💲")
+local Toggle = AutoTab:CreateToggle({
+   Name = "🤑 Toggle Auto Robux Crate 🤑",
+   CurrentValue = false,
+   Flag = "Toggle12", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- Get the remote
+local crateRemote = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents"):WaitForChild("crateRemote")
+
+-- ID you want to use (change if needed)
+local crateId = 3
+
+-- Infinite loop
+while true do
+    -- Fire "processCrate"
+    crateRemote:FireServer("processCrate", crateId)
+    
+    -- Fire "processReward"
+    crateRemote:FireServer("processReward", crateId)
+    
+    -- Wait 0.1 seconds before repeating
+    task.wait(0.1)
+end
+
+   end,
+})
+
+local TrollTab = Window:CreateTab("🐠 Trolling 🐠", nil) -- Title, Image
+local Section = TrollTab:CreateSection("📺 Teleport To Player 📺")
+local Input = TrollTab:CreateInput({
+	Name = "📞 Teleport to Player 📞",
+	CurrentValue = "",
+	PlaceholderText = "✈ Enter part of a player name... ✈",
+	RemoveTextAfterFocusLost = false,
+	Flag = "Input1",
+	Callback = function(Text)
+            local Players = game:GetService("Players")
+            local LocalPlayer = Players.LocalPlayer
+		-- Partial name matching (case-insensitive)
+		local function findPlayerByPartialName(input)
+			input = input:lower()
+			for _, player in ipairs(Players:GetPlayers()) do
+				if player.Name:lower():find(input) then
+					return player
+				end
+			end
+			return nil
+		end
+
+		local targetPlayer = findPlayerByPartialName(Text)
+
+		if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+			local localChar = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+			local localHRP = localChar:WaitForChild("HumanoidRootPart")
+			local targetHRP = targetPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+			-- Teleport near them to avoid overlapping
+			localHRP.CFrame = targetHRP.CFrame + Vector3.new(2, 0, 0)
+
+			print("Teleported to player:", targetPlayer.Name)
+		else
+			warn("Player not found or character not available.")
+		end
+	end,
+})
+local Section = TrollTab:CreateSection("🐬 Teleport Tool🐬")
+local Button = TrollTab:CreateButton({
+   Name = "💿 Get a Teleport Tool 💿",
+   Callback = function()
+   local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local mouse = player:GetMouse()
+
+-- Create the teleport tool
+local tool = Instance.new("Tool")
+tool.Name = "TeleportTool"
+tool.RequiresHandle = false -- no physical handle needed
+tool.CanBeDropped = false
+
+-- Function to teleport when activated
+tool.Activated:Connect(function()
+    local targetPosition = mouse.Hit.Position
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    humanoidRootPart.CFrame = CFrame.new(targetPosition + Vector3.new(0, 3, 0)) -- teleport slightly above ground
+end)
+
+-- Put tool in backpack
+tool.Parent = player:WaitForChild("Backpack")
+   end,
+})
+
+local Section = TrollTab:CreateSection("❌ Fake Glass Troll ❌")
+local Button = TrollTab:CreateButton({
+   Name = "🔍 Make all glass correct 🔍 (❗ dont jump ❗)",
+   Callback = function()
+   local workspace = game:GetService("Workspace")
+local segmentsFolder = workspace:FindFirstChild("segmentSystem") and workspace.segmentSystem:FindFirstChild("Segments")
+
+if not segmentsFolder then
+    warn("segmentSystem or Segments folder not found in Workspace")
+    return
+end
+
+for i = 1, 55 do
+    local segmentName = "Segment" .. i
+    local segmentModel = segmentsFolder:FindFirstChild(segmentName)
+    if segmentModel then
+        local folder = segmentModel:FindFirstChild("Folder")
+        if folder then
+            -- Find all parts named "Part" inside this Folder (expecting two parts)
+            local parts = {}
+            for _, child in ipairs(folder:GetChildren()) do
+                if child:IsA("BasePart") and child.Name == "Part" then
+                    table.insert(parts, child)
+                end
+            end
+
+            -- Set CanCollide to true on each found part named "Part"
+            for _, part in ipairs(parts) do
+                part.CanCollide = true
+            end
+        else
+            warn(segmentName .. " does not have a Folder")
+        end
+    else
+        warn("Could not find " .. segmentName)
+    end
+end
+
+   end,
+})
+local Section = TrollTab:CreateSection("✅ Show Correct Path ✅")
+local Button = TrollTab:CreateButton({
+   Name = "🌉 Show path 🌉",
+   Callback = function()
+   local workspace = game:GetService("Workspace")
+local segmentsFolder = workspace:FindFirstChild("segmentSystem") and workspace.segmentSystem:FindFirstChild("Segments")
+
+if not segmentsFolder then
+    warn("segmentSystem or Segments folder not found in Workspace")
+    return
+end
+
+for i = 1, 55 do
+    local segmentName = "Segment" .. i
+    local segmentModel = segmentsFolder:FindFirstChild(segmentName)
+    if segmentModel then
+        local folder = segmentModel:FindFirstChild("Folder")
+        if folder then
+            for _, part in ipairs(folder:GetChildren()) do
+                if part:IsA("BasePart") and part.Name == "Part" then
+                    if part.CanCollide then
+                        part.BrickColor = BrickColor.new("Lime green")
+                    else
+                        part.BrickColor = BrickColor.new("Bright red")
+                    end
+                end
+            end
+        else
+            warn(segmentName .. " does not have a Folder")
+        end
+    else
+        warn("Could not find " .. segmentName)
+    end
+end
+
+   end,
+})
+local Section = TrollTab:CreateSection("🚀 Player Troll 🚀")
+local Input = TrollTab:CreateInput({
+	Name = "🥵 Sit on player head 🥵",
+	CurrentValue = "",
+	PlaceholderText = "Enter Player Name...",
+	RemoveTextAfterFocusLost = false,
+	Flag = "Input1",
+Callback = function(Text)
+    local Players = game:GetService("Players")
+    local RunService = game:GetService("RunService")
+
+    local inputName = Text:lower() -- get the input from text box, case insensitive
+    local speaker = Players.LocalPlayer
+
+    -- Find the first player whose name starts with the inputName (case insensitive)
+    local targetPlayer = nil
+    for _, player in pairs(Players:GetPlayers()) do
+        if player.Name:lower():sub(1, #inputName) == inputName then
+            targetPlayer = player
+            break
+        end
+    end
+
+    if not targetPlayer then
+        warn("No player found matching '" .. Text .. "'")
+        return
+    end
+
+    local headSit -- to store the connection
+
+    if headSit then
+        headSit:Disconnect()
+        headSit = nil
+    end
+
+    local character = speaker.Character
+    if not character then
+        warn("Your character is not loaded.")
+        return
+    end
+
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        warn("No humanoid found in your character.")
+        return
+    end
+
+    humanoid.Sit = true
+
+    headSit = RunService.Heartbeat:Connect(function()
+        local targetChar = targetPlayer.Character
+        local speakerChar = speaker.Character
+        local targetRoot = targetChar and targetChar:FindFirstChild("HumanoidRootPart")
+        local speakerRoot = speakerChar and speakerChar:FindFirstChild("HumanoidRootPart")
+        local speakerHumanoid = speakerChar and speakerChar:FindFirstChildOfClass("Humanoid")
+
+        if targetPlayer and targetChar and targetRoot and speakerRoot and speakerHumanoid and speakerHumanoid.Sit == true then
+            speakerRoot.CFrame = targetRoot.CFrame * CFrame.new(0, 1.6, 0.4)
+        else
+            if headSit then
+                headSit:Disconnect()
+                headSit = nil
+            end
+        end
+    end)
+end,
+})
+
+local Input = TrollTab:CreateInput({
+    Name = "🥵 Bang Player 🥵",
+    CurrentValue = "",
+    PlaceholderText = "Enter Player Name...",
+    RemoveTextAfterFocusLost = false,
+    Flag = "Input1",
+    Callback = function(Text)
+        local Players = game:GetService("Players")
+        local RunService = game:GetService("RunService")
+
+        local localPlayer = Players.LocalPlayer
+        local inputName = Text:lower()
+
+        local humanoid = localPlayer.Character and localPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+        if not humanoid then
+            warn("Humanoid not found in local player's character")
+            return
+        end
+
+        -- Helper function to check rig type
+        local function r15(player)
+            return player.Character and player.Character:FindFirstChildOfClass("Humanoid") and player.Character.Humanoid.RigType == Enum.HumanoidRigType.R15
+        end
+
+        -- Cleanup any existing animation and connections
+        if bang then
+            bang:Stop()
+            bang:Destroy()
+            bang = nil
+        end
+        if bangAnim then
+            bangAnim:Destroy()
+            bangAnim = nil
+        end
+        if bangLoop then
+            bangLoop:Disconnect()
+            bangLoop = nil
+        end
+        if bangDied then
+            bangDied:Disconnect()
+            bangDied = nil
+        end
+
+        -- Find target player by partial name
+        local targetPlayer = nil
+        for _, player in pairs(Players:GetPlayers()) do
+            if player.Name:lower():sub(1, #inputName) == inputName then
+                targetPlayer = player
+                break
+            end
+        end
+
+        if not targetPlayer then
+            warn("No player found matching '" .. Text .. "'")
+            return
+        end
+
+        -- Play the animation
+        bangAnim = Instance.new("Animation")
+        bangAnim.AnimationId = not r15(localPlayer) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+        bang = humanoid:LoadAnimation(bangAnim)
+        bang:Play(0.1, 1, 1)
+        bang:AdjustSpeed(3)
+
+        -- Stop animation on death
+        bangDied = humanoid.Died:Connect(function()
+            bang:Stop()
+            bangAnim:Destroy()
+            bangDied:Disconnect()
+            if bangLoop then
+                bangLoop:Disconnect()
+            end
+        end)
+
+        -- Keep player in position relative to target
+        local bangOffset = CFrame.new(0, 0, 1.1)
+
+        bangLoop = RunService.Stepped:Connect(function()
+            pcall(function()
+                local targetChar = targetPlayer.Character
+                local targetRoot = targetChar and targetChar:FindFirstChild("HumanoidRootPart")
+                local localRoot = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if targetRoot and localRoot then
+                    localRoot.CFrame = targetRoot.CFrame * bangOffset
+                end
+            end)
+        end)
+    end,
+})
+
+local PlayerTab = Window:CreateTab("🛹 Player 🛹", nil) -- Title, Image
+local Section = PlayerTab:CreateSection("👴 Character 👴")
+local Slider = PlayerTab:CreateSlider({
+   Name = "🚅 Walkspeed 🚅",
+   Range = {0, 250},
+   Increment = 1,
+   Suffix = "🚆 Speed 🚆",
+   CurrentValue = 20,
+   Flag = "Slider1",
+   Callback = function(Value)
+      local player = game.Players.LocalPlayer
+      if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+         player.Character.Humanoid.WalkSpeed = Value
+      else
+         warn("Humanoid not found")
+      end
+   end,
+})
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "🦘 JumpPower 🦘",
+   Range = {0, 250},
+   Increment = 1,
+   Suffix = "🛫 Power 🛫",
+   CurrentValue = 50,
+   Flag = "Slider2",
+   Callback = function(Value)
+      local player = game.Players.LocalPlayer
+      if player and player.Character and player.Character:FindFirstChild("Humanoid") then
+         player.Character.Humanoid.JumpPower = Value
+      else
+         warn("Humanoid not found")
+      end
+   end,
+})
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "🌍 Gravity 🌍",
+   Range = {0, 200},
+   Increment = 1,
+   Suffix = "🌌 Gravity 🌌",
+   CurrentValue = 196.2,
+   Flag = "Slider3",
+   Callback = function(Value)
+      workspace.Gravity = Value
+   end,
+})
+
+local Slider = PlayerTab:CreateSlider({
+   Name = "🎥 FOV 🎥",
+   Range = {0, 250},
+   Increment = 1,
+   Suffix = "🔭 Zoom 🔍",
+   CurrentValue = 70,
+   Flag = "Slider4",
+   Callback = function(Value)
+      local camera = workspace.CurrentCamera
+      if camera then
+         camera.FieldOfView = Value
+      else
+         warn("Camera not found")
+      end
+   end,
+})
+local Button = PlayerTab:CreateButton({
+   Name = "💘 Respawn 💘",
+   Callback = function()
+   local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+if player.Character then
+    player.Character:BreakJoints()  -- Breaks the character joints to kill the character locally
+end
+   end,
+})
+local Section = PlayerTab:CreateSection("🛠️ Server 🛠️")
+local Button = PlayerTab:CreateButton({
+   Name = "🔁 Rejoin 🔁",
+   Callback = function()
+            local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local player = Players.LocalPlayer
+
+-- Get current game's place and server
+local placeId = game.PlaceId
+local jobId = game.JobId
+
+-- Teleport player back to the same server (rejoin)
+TeleportService:TeleportToPlaceInstance(placeId, jobId, player)
+
+   end,
+})
+
+local Button = PlayerTab:CreateButton({
+   Name = "🤞 Serverhop 🤞",
+   Callback = function()
+local HttpService = game:GetService("HttpService")
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+local PlaceId = game.PlaceId
+local JobId = game.JobId
+
+-- Function to make HTTP request compatible with many exploits
+local function makeRequest(url)
+    if syn and syn.request then
+        return syn.request({Url = url})
+    elseif http and http.request then
+        return http.request({Url = url})
+    elseif httprequest then
+        return httprequest({Url = url})
+    else
+        error("No compatible HTTP request function found.")
+    end
+end
+
+local url = string.format("https://games.roblox.com/v1/games/%d/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true", PlaceId)
+
+local success, response = pcall(makeRequest, url)
+if not success or not response or not response.Body then
+    warn("Serverhop: Failed to get server list.")
+    return
+end
+
+local body
+local decodeSuccess, decodeResult = pcall(function()
+    return HttpService:JSONDecode(response.Body)
+end)
+if not decodeSuccess or not decodeResult then
+    warn("Serverhop: Failed to decode JSON response.")
+    return
+end
+body = decodeResult
+
+local servers = {}
+if body and body.data then
+    for _, v in pairs(body.data) do
+        if type(v) == "table" and tonumber(v.playing) and tonumber(v.maxPlayers) and v.playing < v.maxPlayers and v.id ~= JobId then
+            table.insert(servers, v.id)
+        end
+    end
+end
+
+if #servers == 0 then
+    warn("Serverhop: No suitable servers found.")
+    return
+end
+
+local chosenServer = servers[math.random(1, #servers)]
+print("Serverhop: Teleporting to server ID: " .. chosenServer)
+TeleportService:TeleportToPlaceInstance(PlaceId, chosenServer, player)
+   end,
+})
+
+local RandomTab = Window:CreateTab("🎲 Random 🎲", nil) -- Title, Image
+local Section = RandomTab:CreateSection("❓ Random Stuff ❓")
+local Button = RandomTab:CreateButton({
+   Name = "🦅 Fly 🦅",
+   Callback = function()
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxikTheBest/scripts/refs/heads/main/flyV3"))()
+   end,
+})
+
+local Button = RandomTab:CreateButton({
+   Name = "👻 Noclip 👻",
+   Callback = function()
+   local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+
+local noclipEnabled = false
+local connection
+
+-- Create GUI first so toggleButton exists
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "NoclipGUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Name = "MainFrame"
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BorderSizePixel = 0
+frame.Parent = ScreenGui
+frame.Active = true
+frame.Draggable = true
+
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+toggleButton.Size = UDim2.new(1, -20, 0, 50)
+toggleButton.Position = UDim2.new(0, 10, 0, 25)
+toggleButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+toggleButton.BorderSizePixel = 0
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.Font = Enum.Font.SourceSansBold
+toggleButton.TextSize = 24
+toggleButton.Parent = frame
+toggleButton.Text = "Noclip: OFF"
+
+-- Update button text (define this BEFORE calling it)
+local function updateButton()
+    toggleButton.Text = noclipEnabled and "Noclip: ON" or "Noclip: OFF"
+end
+
+-- Get current character dynamically
+local function getCharacter()
+    return player.Character or player.CharacterAdded:Wait()
+end
+
+-- Noclip function
+local function noclip()
+    local character = getCharacter()
+    if not character then return end
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+end
+
+local function enableNoclip()
+    if connection then connection:Disconnect() end
+    connection = RunService.RenderStepped:Connect(noclip)
+    noclipEnabled = true
+    updateButton()
+end
+
+local function disableNoclip()
+    if connection then
+        connection:Disconnect()
+        connection = nil
+    end
+    local character = getCharacter()
+    if character then
+        for _, part in pairs(character:GetChildren()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = true
+            end
+        end
+    end
+    noclipEnabled = false
+    updateButton()
+end
+
+local function toggleNoclip()
+    if noclipEnabled then
+        disableNoclip()
+    else
+        enableNoclip()
+    end
+end
+
+toggleButton.MouseButton1Click:Connect(toggleNoclip)
+
+-- Initialize button text
+updateButton()
+
+   end,
+})
+
+local Button = RandomTab:CreateButton({
+   Name = "🚪 Kick Your Self 🚪",
+   Callback = function()
+   game:GetService("Players").LocalPlayer:Kick("🚪 Kicked on your request! 🚪")
+   end,
+})
